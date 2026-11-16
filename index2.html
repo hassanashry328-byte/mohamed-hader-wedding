@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohamed &amp; Hader | 4 December 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory: '#FAF8F5',
+            cream: '#F3EFEA',
+            sage: '#4A5D4E',
+            sageDark: '#36463A',
+            gold: '#C5A059',
+            goldLight: '#DEC38B',
+            ink: '#2A332C',
+            muted: '#68736A'
+          },
+          fontFamily: {
+            script: ['"Great Vibes"', 'cursive'],
+            serif: ['"Cormorant Garamond"', 'serif'],
+            arabic: ['"Cairo"', 'sans-serif'],
+            quran: ['"Amiri"', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="antialiased selection:bg-sage selection:text-ivory">
+
+  <!-- SPLASH SCREEN -->
+  <div id="splash-screen">
+    <div class="splash-bg"></div>
+    <div class="splash-overlay"></div>
+
+    <div class="splash-card">
+      <div class="w-16 h-16 mx-auto mb-5 rounded-full border border-gold/60 bg-ivory/90 flex items-center justify-center shadow-sm">
+        <span class="font-serif text-lg tracking-widest text-sage font-semibold">M <span class="text-gold">&amp;</span> H</span>
+      </div>
+
+      <p class="font-serif text-xs uppercase tracking-[0.28em] text-muted mb-2">Wedding Invitation</p>
+
+      <h1 class="couple-title-en mb-1">Mohamed &amp; Hader</h1>
+      <h2 class="font-quran text-2xl sm:text-3xl text-sage font-bold mb-5">محمد <span class="text-gold mx-1">&amp;</span> هدير</h2>
+
+      <div class="flex items-center justify-center gap-3 my-4">
+        <span class="h-px w-12 bg-gold/50"></span>
+        <span class="text-gold text-xs">✦</span>
+        <span class="h-px w-12 bg-gold/50"></span>
+      </div>
+
+      <p class="font-serif text-sm sm:text-base tracking-[0.2em] text-ink uppercase mb-1">Friday • 4 December 2026</p>
+      <p class="text-xs text-muted mb-7">الجمعة ٤ ديسمبر ٢٠٢٦</p>
+
+      <button onclick="openInvitation()" class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-sage hover:bg-sageDark text-ivory font-serif text-sm tracking-[0.18em] uppercase shadow-lg shadow-sage/25 transition-all duration-300 hover:scale-105 cursor-pointer">
+        <span>Open Invitation</span>
+        <span class="text-goldLight">♡</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="fixed top-4 inset-x-0 z-50 px-4">
+    <nav class="max-w-4xl mx-auto bg-ivory/85 backdrop-blur-md border border-gold/35 rounded-full px-4 sm:px-7 py-2.5 shadow-md shadow-sage/5 flex items-center justify-between gap-2">
+      <a href="#home" class="font-serif text-base sm:text-lg font-bold tracking-wider text-sage shrink-0">
+        M <span class="text-gold">&amp;</span> H
+      </a>
+
+      <div class="flex items-center gap-3 sm:gap-6 text-xs sm:text-sm text-muted overflow-x-auto no-scrollbar py-1">
+        <a href="#invitation" class="nav-link hover:text-sage transition whitespace-nowrap">الدعوة</a>
+        <a href="#moments" class="nav-link hover:text-sage transition whitespace-nowrap">لحظاتنا</a>
+        <a href="#countdown" class="nav-link hover:text-sage transition whitespace-nowrap">الموعد</a>
+        <a href="#venue" class="nav-link hover:text-sage transition whitespace-nowrap">القاعة</a>
+        <a href="#wishes" class="nav-link hover:text-sage transition whitespace-nowrap">التهاني</a>
+      </div>
+
+      <button id="music-toggle" onclick="toggleMusic()" aria-label="تشغيل أو إيقاف الموسيقى" class="w-9 h-9 rounded-full border border-gold/50 bg-white/80 text-sage hover:bg-sage hover:text-ivory flex items-center justify-center transition shrink-0 cursor-pointer" title="الموسيقى">
+        <span id="music-icon" class="text-sm">♪</span>
+      </button>
+    </nav>
+  </header>
+<!-- HERO SECTION (WITH COUNTDOWN) -->
+  <section id="home" class="relative min-h-[92vh] flex items-center justify-center pt-28 pb-16 px-4 overflow-hidden">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="relative z-10 max-w-3xl mx-auto text-center">
+      <p class="font-serif text-xs sm:text-sm uppercase tracking-[0.32em] text-gold mb-3">Together Forever</p>
+      <h2 class="couple-title-en mb-2">Mohamed &amp; Hader</h2>
+      <h3 class="font-quran text-3xl sm:text-4xl text-sage font-bold mb-6">محمد <span class="text-gold">&amp;</span> هدير</h3>
+
+      <!-- Date Pill -->
+      <div class="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-5 px-6 py-3 rounded-2xl bg-white/85 backdrop-blur-sm border border-gold/40 shadow-sm mb-8">
+        <span class="font-serif text-base sm:text-lg tracking-widest text-ink font-semibold">FRIDAY, 4 DECEMBER 2026</span>
+        <span class="hidden sm:inline text-gold">•</span>
+        <span class="text-sm font-medium text-sage">الجمعة ٤ ديسمبر ٢٠٢٦</span>
+      </div>
+
+      <!-- Countdown Boxes Inside Hero -->
+      <div class="grid grid-cols-4 gap-2.5 sm:gap-5 max-w-xl mx-auto text-center" dir="ltr">
+        <div class="bg-white/80 backdrop-blur-md border border-gold/40 rounded-2xl p-3 sm:p-5 shadow-sm">
+          <span id="days" class="font-serif text-2xl sm:text-4xl font-bold text-sage block">00</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-widest text-gold font-semibold mt-0.5 block">Days</span>
+          <span class="text-[11px] text-muted">يوم</span>
+        </div>
+        <div class="bg-white/80 backdrop-blur-md border border-gold/40 rounded-2xl p-3 sm:p-5 shadow-sm">
+          <span id="hours" class="font-serif text-2xl sm:text-4xl font-bold text-sage block">00</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-widest text-gold font-semibold mt-0.5 block">Hours</span>
+          <span class="text-[11px] text-muted">ساعة</span>
+        </div>
+        <div class="bg-white/80 backdrop-blur-md border border-gold/40 rounded-2xl p-3 sm:p-5 shadow-sm">
+          <span id="minutes" class="font-serif text-2xl sm:text-4xl font-bold text-sage block">00</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-widest text-gold font-semibold mt-0.5 block">Minutes</span>
+          <span class="text-[11px] text-muted">دقيقة</span>
+        </div>
+        <div class="bg-white/80 backdrop-blur-md border border-gold/40 rounded-2xl p-3 sm:p-5 shadow-sm">
+          <span id="seconds" class="font-serif text-2xl sm:text-4xl font-bold text-sage block">00</span>
+          <span class="text-[10px] sm:text-xs uppercase tracking-widest text-gold font-semibold mt-0.5 block">Seconds</span>
+          <span class="text-[11px] text-muted">ثانية</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- QURAN & INVITATION SECTION -->
+  <section id="invitation" class="reveal-section py-16 px-4">
+    <div class="max-w-3xl mx-auto editorial-card p-8 sm:p-12 text-center">
+      <span class="text-gold text-xl block mb-3">﴿ ✦ ﴾</span>
+      <p class="font-quran text-2xl sm:text-3xl leading-relaxed text-sage font-bold mb-4">
+        «وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً»
+      </p>
+      <p class="text-xs text-muted mb-8">سورة الروم — آية ٢١</p>
+
+      <div class="h-px w-24 bg-gold/50 mx-auto mb-8"></div>
+
+      <p class="text-base sm:text-lg leading-loose text-ink font-medium mb-3">
+        بقلوبٍ يغمرها الفرح، نتشرّف بدعوتكم لمشاركتنا ليلة العمر وبداية رحلتنا معاً.
+      </p>
+      <p class="font-serif text-lg sm:text-xl italic text-muted">
+        With joyful hearts, we invite you to celebrate the beginning of our forever.
+      </p>
+    </div>
+  </section>
+
+  <div class="ornament-divider reveal-section">
+    <span class="ornament-line"></span>
+    <span class="text-gold text-sm">❖</span>
+    <span class="ornament-line"></span>
+  </div>
+
+  <!-- MOMENTS & PHOTOS SECTIONS -->
+  <section id="moments" class="reveal-section py-12 px-4">
+    <div class="max-w-5xl mx-auto space-y-20">
+
+      <!-- 1. Rings Photo -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div class="md:col-span-6 slide-from-right">
+          <div class="photo-frame aspect-[4/3]">
+            <img src="rings.jpeg" alt="وعد أبدي - محمد وهدير" class="w-full h-full object-cover" />
+          </div>
+        </div>
+        <div class="md:col-span-6 text-center md:text-right space-y-3 slide-from-left">
+          <p class="font-serif text-xs uppercase tracking-[0.28em] text-gold">The Promise</p>
+          <h3 class="font-quran text-3xl text-sage font-bold">وعدٌ أبدي</h3>
+          <p class="text-sm sm:text-base text-muted leading-relaxed">
+            ميثاقُ مودةٍ يجمع قلبين على الوفاء والسكن.
+          </p>
+          <p class="font-serif text-lg italic text-sage/80">Two souls, one timeless promise.</p>
+        </div>
+      </div>
+
+      <!-- 2. Engagement Photo -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div class="md:col-span-6 md:order-2 slide-from-left">
+          <div class="photo-frame aspect-[4/3]">
+            <img src="engagement.jpeg" alt="بداية الحكاية - خطوبة محمد وهدير" class="w-full h-full object-cover" />
+          </div>
+        </div>
+        <div class="md:col-span-6 md:order-1 text-center md:text-right space-y-3 slide-from-right">
+          <p class="font-serif text-xs uppercase tracking-[0.28em] text-gold">Better Together</p>
+          <h3 class="font-quran text-3xl text-sage font-bold">بداية الحكاية</h3>
+          <p class="text-sm sm:text-base text-muted leading-relaxed">
+            لحظةٌ أضاءت طريقنا، لتكتمل اليوم بأجمل لقاء.
+          </p>
+          <p class="font-serif text-lg italic text-sage/80">Where our joyful journey officially began.</p>
+        </div>
+      </div>
+
+      <!-- 3. Childhood Photo -->
+      <div class="max-w-2xl mx-auto text-center space-y-6">
+        <div>
+          <p class="font-serif text-xs uppercase tracking-[0.28em] text-gold mb-1">Our Story</p>
+          <h3 class="font-quran text-3xl text-sage font-bold">منذ الصغر</h3>
+        </div>
+        <div class="photo-frame aspect-[3/4] max-w-md mx-auto">
+          <img src="kids.jpeg" alt="محمد وهدير منذ الصغر" class="w-full h-full object-cover" />
+        </div>
+        <p class="font-serif text-lg italic text-muted">A dream that grew with us through the years.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="ornament-divider reveal-section">
+    <span class="ornament-line"></span>
+    <span class="text-gold text-sm">❖</span>
+    <span class="ornament-line"></span>
+  </div>
+
+ 
+ 
+      <!-- Countdown Boxes -->
+       <!--
+    
+      <div class="grid grid-cols-4 gap-3 sm:gap-6 max-w-2xl mx-auto text-center" dir="ltr">
+        <div class="editorial-card p-4 sm:p-6">
+          <span id="days" class="font-serif text-3xl sm:text-5xl font-bold text-sage block">00</span>
+          <span class="text-[11px] sm:text-xs uppercase tracking-widest text-gold font-semibold mt-1 block">Days</span>
+          <span class="text-xs text-muted">يوم</span>
+        </div>
+        <div class="editorial-card p-4 sm:p-6">
+          <span id="hours" class="font-serif text-3xl sm:text-5xl font-bold text-sage block">00</span>
+          <span class="text-[11px] sm:text-xs uppercase tracking-widest text-gold font-semibold mt-1 block">Hours</span>
+          <span class="text-xs text-muted">ساعة</span>
+        </div>
+        <div class="editorial-card p-4 sm:p-6">
+          <span id="minutes" class="font-serif text-3xl sm:text-5xl font-bold text-sage block">00</span>
+          <span class="text-[11px] sm:text-xs uppercase tracking-widest text-gold font-semibold mt-1 block">Minutes</span>
+          <span class="text-xs text-muted">دقيقة</span>
+        </div>
+        <div class="editorial-card p-4 sm:p-6">
+          <span id="seconds" class="font-serif text-3xl sm:text-5xl font-bold text-sage block">00</span>
+          <span class="text-[11px] sm:text-xs uppercase tracking-widest text-gold font-semibold mt-1 block">Seconds</span>
+          <span class="text-xs text-muted">ثانية</span>
+        </div>
+      </div>   -->
+
+      <!-- December 2026 Calendar -->
+<!--        
+      <div class="editorial-card max-w-md mx-auto p-6 sm:p-8 text-center">
+        <p class="font-serif text-lg tracking-[0.2em] uppercase text-sage font-bold mb-1">December 2026</p>
+        <p class="text-xs text-muted mb-5">ديسمبر ٢٠٢٦</p>
+
+        <div class="grid grid-cols-7 gap-2 text-xs font-semibold text-gold mb-3" dir="ltr">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+
+        <div class="grid grid-cols-7 gap-2 text-sm text-ink" dir="ltr">
+          <span></span><span></span>
+          <span class="py-1.5">1</span>
+          <span class="py-1.5">2</span>
+          <span class="py-1.5">3</span>
+          <span class="py-1.5 rounded-full bg-sage text-ivory font-bold shadow-md ring-2 ring-gold pulse-soft">4</span>
+          <span class="py-1.5">5</span>
+          <span class="py-1.5">6</span><span class="py-1.5">7</span><span class="py-1.5">8</span><span class="py-1.5">9</span><span class="py-1.5">10</span><span class="py-1.5">11</span><span class="py-1.5">12</span>
+          <span class="py-1.5">13</span><span class="py-1.5">14</span><span class="py-1.5">15</span><span class="py-1.5">16</span><span class="py-1.5">17</span><span class="py-1.5">18</span><span class="py-1.5">19</span>
+          <span class="py-1.5">20</span><span class="py-1.5">21</span><span class="py-1.5">22</span><span class="py-1.5">23</span><span class="py-1.5">24</span><span class="py-1.5">25</span><span class="py-1.5">26</span>
+          <span class="py-1.5">27</span><span class="py-1.5">28</span><span class="py-1.5">29</span><span class="py-1.5">30</span><span class="py-1.5">31</span>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!-- December 2026 Calendar -->
+      <div class="editorial-card max-w-md mx-auto p-6 sm:p-8 text-center">
+        <p class="font-serif text-lg tracking-[0.2em] uppercase text-sage font-bold mb-1">December 2026</p>
+        <p class="text-xs text-muted mb-5">ديسمبر ٢٠٢٦</p>
+
+        <div class="grid grid-cols-7 gap-2 text-xs font-semibold text-gold mb-3" dir="ltr">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+
+        <div class="grid grid-cols-7 gap-y-2 text-sm text-ink items-center" dir="ltr">
+          <span></span><span></span>
+          <span class="py-1.5">1</span>
+          <span class="py-1.5">2</span>
+          <span class="py-1.5">3</span>
+          <span class="w-9 h-9 mx-auto flex items-center justify-center rounded-full bg-sage text-ivory font-bold shadow-md ring-2 ring-gold pulse-soft">4</span>
+          <span class="py-1.5">5</span>
+          <span class="py-1.5">6</span><span class="py-1.5">7</span><span class="py-1.5">8</span><span class="py-1.5">9</span><span class="py-1.5">10</span><span class="py-1.5">11</span><span class="py-1.5">12</span>
+          <span class="py-1.5">13</span><span class="py-1.5">14</span><span class="py-1.5">15</span><span class="py-1.5">16</span><span class="py-1.5">17</span><span class="py-1.5">18</span><span class="py-1.5">19</span>
+          <span class="py-1.5">20</span><span class="py-1.5">21</span><span class="py-1.5">22</span><span class="py-1.5">23</span><span class="py-1.5">24</span><span class="py-1.5">25</span><span class="py-1.5">26</span>
+          <span class="py-1.5">27</span><span class="py-1.5">28</span><span class="py-1.5">29</span><span class="py-1.5">30</span><span class="py-1.5">31</span>
+        </div>
+
+        <!-- Add to Calendar Buttons -->
+        <div class="mt-7 pt-5 border-t border-gold/25 flex flex-col sm:flex-row items-center justify-center gap-2.5">
+          <a
+            href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Mohamed+%26+Hader+Wedding&dates=20261204T170000Z/20261204T210000Z&details=Wedding+Celebration+of+Mohamed+%26+Hader+at+Citadel+Hall,+Jewel+Hotel.+Location:+https://share.google/8MyrDvoZ94dbffSTs&location=Citadel+Hall,+Jewel+Hotel,+Zahraa+Madinet+Nasr,+Cairo"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-sage hover:bg-sageDark text-ivory text-xs font-semibold shadow-sm transition"
+          >
+            <span>حفظ في Google Calendar</span>
+            <span class="text-goldLight">+</span>
+          </a>
+
+          <button
+            onclick="downloadICS()"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-ivory hover:bg-cream border border-gold/50 text-sage text-xs font-semibold transition cursor-pointer"
+          >
+            <span>تقويم الآيفون / الجهاز</span>
+            <span class="text-gold">↓</span>
+          </button>
+        </div>
+      </div>
+
+  <div class="ornament-divider reveal-section">
+    <span class="ornament-line"></span>
+    <span class="text-gold text-sm">❖</span>
+    <span class="ornament-line"></span>
+  </div>
+
+  <!-- VENUE & DETAILS SECTION -->
+  <section id="venue" class="reveal-section py-12 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="font-serif text-xs uppercase tracking-[0.28em] text-gold mb-1">When &amp; Where</p>
+      <h3 class="font-quran text-3xl sm:text-4xl text-sage font-bold mb-8">الموعد</h3>
+
+      <!-- Animated Architectural Hall Illustration -->
+      <div id="hall-illustration" class="max-w-xs mx-auto mb-10">
+        <svg viewBox="0 0 240 130" class="w-full h-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g class="hall-part hall-part-1">
+            <rect x="20" y="112" width="200" height="6" rx="3" fill="#4A5D4E"/>
+            <rect x="32" y="105" width="176" height="5" rx="2" fill="#C5A059"/>
+          </g>
+          <g class="hall-part hall-part-2">
+            <rect x="46" y="56" width="10" height="49" rx="2" fill="#4A5D4E"/>
+            <rect x="82" y="56" width="10" height="49" rx="2" fill="#4A5D4E"/>
+            <rect x="148" y="56" width="10" height="49" rx="2" fill="#4A5D4E"/>
+            <rect x="184" y="56" width="10" height="49" rx="2" fill="#4A5D4E"/>
+          </g>
+          <g class="hall-part hall-part-3">
+            <path d="M98 105V76C98 63.8497 107.85 54 120 54C132.15 54 142 63.8497 142 76V105" stroke="#C5A059" stroke-width="3.5"/>
+            <path d="M120 68C120 68 113 62 113 58.5C113 56.5 114.6 55 116.5 55C118 55 119.3 55.8 120 57C120.7 55.8 122 55 123.5 55C125.4 55 127 56.5 127 58.5C127 62 120 68 120 68Z" fill="#C5A059"/>
+          </g>
+          <g class="hall-part hall-part-4">
+            <path d="M34 56L120 26L206 56H34Z" fill="#4A5D4E"/>
+            <path d="M84 38C88 22 102 12 120 12C138 12 152 22 156 38" stroke="#C5A059" stroke-width="3"/>
+          </g>
+          <g class="hall-part hall-part-5">
+            <circle cx="120" cy="7" r="3.5" fill="#C5A059"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- 4 Details Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 text-center mb-9">
+        <div class="editorial-card p-6">
+          <p class="text-xs text-gold font-semibold tracking-wider mb-1">التاريخ • DATE</p>
+          <p class="text-xl font-bold text-sage mb-1">الجمعة ٤ ديسمبر ٢٠٢٦</p>
+          <p class="font-serif text-lg sm:text-xl font-semibold text-ink">Friday, 4th December 2026</p>
+        </div>
+
+        <div class="editorial-card p-6">
+          <p class="text-xs text-gold font-semibold tracking-wider mb-1">الموعد • TIME</p>
+          <p class="text-xl font-bold text-sage mb-1">من السابعة حتى الحادية عشرة مساءً</p>
+          <p class="font-serif text-lg sm:text-xl font-semibold text-ink">7:00 PM – 11:00 PM</p>
+        </div>
+
+        <div class="editorial-card p-6">
+          <p class="text-xs text-gold font-semibold tracking-wider mb-1">المكان • VENUE</p>
+          <p class="text-xl font-bold text-sage mb-1">فندق جويل — زهراء مدينة نصر</p>
+          <p class="font-serif text-lg sm:text-xl font-semibold text-ink">Jewel Hotel – Zahraa Madinet Nasr</p>
+        </div>
+
+        <div class="editorial-card p-6">
+          <p class="text-xs text-gold font-semibold tracking-wider mb-1">القاعة • HALL</p>
+          <p class="text-xl font-bold text-sage mb-1">قاعة سيتاديل</p>
+          <p class="font-serif text-lg sm:text-xl font-semibold text-ink">Citadel Hall</p>
+        </div>
+      </div>
+
+      <!-- Location Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="https://share.google/8MyrDvoZ94dbffSTs" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-sage hover:bg-sageDark text-ivory text-sm font-semibold shadow-md transition">
+          <span>الموقع على الخريطة • Open Location</span>
+        </a>
+        <button onclick="copyLocation()" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white border border-gold/60 text-sage hover:bg-cream text-sm font-semibold transition cursor-pointer">
+          <span>نسخ الرابط</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament-divider reveal-section">
+    <span class="ornament-line"></span>
+    <span class="text-gold text-sm">❖</span>
+    <span class="ornament-line"></span>
+  </div>
+
+  <!-- GUEST WISHES SECTION -->
+  <section id="wishes" class="reveal-section py-12 pb-24 px-4">
+    <div class="max-w-2xl mx-auto">
+      <div class="text-center mb-8">
+        <p class="font-serif text-xs uppercase tracking-[0.28em] text-gold mb-1">Guest Wishes</p>
+        <h3 class="font-quran text-3xl sm:text-4xl text-sage font-bold mb-2">حائط الذكريات والتهاني</h3>
+        <p class="text-sm text-muted">اتركوا كلمةً تبقى ذكرى جميلة في قلوبنا</p>
+      </div>
+
+      <form id="wish-form" onsubmit="addWish(event)" class="editorial-card p-6 sm:p-8 space-y-4 mb-8">
+        <div>
+          <label for="guest-name" class="block text-xs font-semibold text-sage mb-1.5">الاسم الكريم • Your Name</label>
+          <input id="guest-name" type="text" required placeholder="اكتب اسمك هنا..." class="w-full px-4 py-3 rounded-xl bg-ivory border border-gold/40 focus:border-sage focus:outline-none text-sm text-ink" />
+        </div>
+        <div>
+          <label for="guest-message" class="block text-xs font-semibold text-sage mb-1.5">رسالة التهنئة • Your Message</label>
+          <textarea id="guest-message" rows="3" required placeholder="اكتب تهنئتك لمحمد وهدير..." class="w-full px-4 py-3 rounded-xl bg-ivory border border-gold/40 focus:border-sage focus:outline-none text-sm text-ink"></textarea>
+        </div>
+        <button type="submit" class="w-full py-3.5 rounded-full bg-sage hover:bg-sageDark text-ivory text-sm font-semibold tracking-wide shadow-md transition cursor-pointer">
+          إرسال التهنئة • Send Wish ♡
+        </button>
+      </form>
+
+      <div id="wishes-list" class="space-y-4"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-gold/30 bg-cream/70 py-10 px-4 text-center">
+    <p class="couple-title-en text-3xl sm:text-4xl mb-1">Mohamed &amp; Hader</p>
+    <p class="font-serif text-xs uppercase tracking-[0.25em] text-muted">4 December 2026 • Citadel Hall</p>
+  </footer>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 px-5 py-3 rounded-full bg-sage text-ivory text-xs sm:text-sm shadow-lg opacity-0 translate-y-4 pointer-events-none transition-all duration-300"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
