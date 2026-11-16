@@ -1,5 +1,5 @@
 // رابط الـ Web App الخاص بجوجل شيت
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzCUS4GOdEnTGyTBKP6pqIXfT9k0uhbq-nZ2ns1h4fxSMd69ydzGELqHRWpyjk7__gh/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw0rDq_vnJ_v3wWCcB0a5mfUCNRoMy4w9qsE20slfRYhpJ-wYwEeYzgsU225PK_YE8l/exec";
 
 // تعريف ملف الأغنية
 const bgMusic = new Audio('song.mp3');
