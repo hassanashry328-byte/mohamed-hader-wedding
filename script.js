@@ -1,28 +1,30 @@
 // رابط الـ Web App الخاص بجوجل شيت
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw88LCKAJ8QCXDsFQUZSCk-_JEgdIPcnKBEN2tautwfim2hkQrmJF88J07mTKuC3_sT/exec";
 
-// 1. فتح شاشة الترحيب وتشغيل أغنية الليلادي فور الضغط
+// تعريف ملف الأغنية
 const bgMusic = new Audio('song.mp3');
 bgMusic.loop = true; // لتكرار الأغنية تلقائياً
 let isPlaying = false;
 
+// 1. فتح شاشة الترحيب وتشغيل الأغنية فوراً مع الضغط
 function openInvitation() {
   const splash = document.getElementById('splash-screen');
   if (splash) splash.classList.add('hidden-splash');
   
-  // تشغيل الموسيقى فوراً بمجرد تفاعل الضيف بالضغط على زر فتح الدعوة
+  // تشغيل الأغنية فوراً كاستجابة لضغط زر فتح الدعوة
+  bgMusic.currentTime = 0;
   bgMusic.play().then(() => {
     isPlaying = true;
     const musicIcon = document.getElementById('music-icon');
     if (musicIcon) musicIcon.textContent = '❚❚';
     showToast('تم تشغيل أغنية الليلادي 🎵');
   }).catch(e => {
-    console.log("Audio play blocked by browser", e);
-    showToast('اضغط على رمز الموسيقى لتشغيل الأغنية');
+    console.log("Audio play blocked by browser policy", e);
+    showToast('اضغط على رمز الموسيقى بالأعلى لتشغيلها');
   });
 }
 
-// 2. التحكم اليدوي في الموسيقى (تشغيل / إيقاف)
+// 2. التحكم اليدوي في الموسيقى (تشغيل / إيقاف) عبر أيقونة الصوت
 function toggleMusic() {
   if (isPlaying) {
     bgMusic.pause();
