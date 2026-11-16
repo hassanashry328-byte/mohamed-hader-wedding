@@ -220,3 +220,39 @@ section[id] {
   );
   pointer-events: none;
 }
+/* ضبط الخلفية لتكون واضحة وثابتة وملء الشاشة تماماً على الهواتف */
+body {
+  background-image: url('bg.jpeg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* طبقة تفتيح خفيفة فوق الخلفية لضمان قراءة النصوص بوضوح تام على الموبايل */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.75); /* يمكنك تقليل الرقم أو زيادته حسب تفتيح الخلفية */
+  z-index: -1;
+}
+
+/* تحسين المقاسات والهوامش لتناسب الشاشات الصغيرة للموبايل */
+@media (max-width: 768px) {
+  .editorial-card {
+    padding: 1rem !important;
+    margin: 0.5rem;
+  }
+  
+  /* تصغير العناوين قليلاً لكي لا تلتف بشكل مزعج على شاشات الهواتف الضيقة */
+  h1 {
+    font-size: 1.75rem !important;
+  }
+}
