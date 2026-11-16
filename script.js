@@ -1,47 +1,48 @@
-
-
-// استبدل النص التالي برابط الـ Web App الذي نسخْته من جوجل
+// رابط الـ Web App الخاص بجوجل شيت
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw88LCKAJ8QCXDsFQUZSCk-_JEgdIPcnKBEN2tautwfim2hkQrmJF88J07mTKuC3_sT/exec";
 
-// 1. Open Splash Screen & Start Soft Romantic Piano/Harp Melody
-function openInvitation() {
-  const splash = document.getElementById('splash-screen');
-  splash.classList.add('hidden-splash');
-  startRomanticMusic();
-}
-
-// تعريف ملف الأغنية الخاص بك
+// 1. فتح شاشة الترحيب وتشغيل أغنية الليلادي فور الضغط
 const bgMusic = new Audio('song.mp3');
-bgMusic.loop = true; // لكي تستمر الأغنية في التكرار طوال تصفح الموقع
+bgMusic.loop = true; // لتكرار الأغنية تلقائياً
 let isPlaying = false;
 
-function startRomanticMusic() {
+function openInvitation() {
+  const splash = document.getElementById('splash-screen');
+  if (splash) splash.classList.add('hidden-splash');
+  
+  // تشغيل الموسيقى فوراً بمجرد تفاعل الضيف بالضغط على زر فتح الدعوة
   bgMusic.play().then(() => {
     isPlaying = true;
     const musicIcon = document.getElementById('music-icon');
     if (musicIcon) musicIcon.textContent = '❚❚';
+    showToast('تم تشغيل أغنية الليلادي 🎵');
   }).catch(e => {
     console.log("Audio play blocked by browser", e);
+    showToast('اضغط على رمز الموسيقى لتشغيل الأغنية');
   });
 }
 
-function stopRomanticMusic() {
-  bgMusic.pause();
-  isPlaying = false;
-  const musicIcon = document.getElementById('music-icon');
-  if (musicIcon) musicIcon.textContent = '♪';
-}
-
+// 2. التحكم اليدوي في الموسيقى (تشغيل / إيقاف)
 function toggleMusic() {
   if (isPlaying) {
-    stopRomanticMusic();
+    bgMusic.pause();
+    isPlaying = false;
+    const musicIcon = document.getElementById('music-icon');
+    if (musicIcon) musicIcon.textContent = '♪';
     showToast('تم إيقاف الموسيقى');
   } else {
-    startRomanticMusic();
-    showToast('تم تشغيل أغنية الليلادي 🎵');
+    bgMusic.play().then(() => {
+      isPlaying = true;
+      const musicIcon = document.getElementById('music-icon');
+      if (musicIcon) musicIcon.textContent = '❚❚';
+      showToast('تم تشغيل أغنية الليلادي 🎵');
+    }).catch(e => {
+      showToast('تعذر تشغيل الموسيقى');
+    });
   }
 }
-// 3. Countdown Timer to Dec 4, 2026 7:00 PM (Cairo Time UTC+2)
+
+// 3. العد التنازلي لحفل الزفاف (4 ديسمبر 2026 - الساعة 7:00 مساءً بتوقيت القاهرة)
 const weddingDate = new Date('2026-12-04T19:00:00+02:00').getTime();
 
 function updateCountdown() {
@@ -53,15 +54,20 @@ function updateCountdown() {
   const minutes = Math.floor((diff / (1000 * 60)) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
 
-  document.getElementById('days').textContent = String(days).padStart(2, '0');
-  document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-  document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-  document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+  const daysEl = document.getElementById('days');
+  const hoursEl = document.getElementById('hours');
+  const minutesEl = document.getElementById('minutes');
+  const secondsEl = document.getElementById('seconds');
+
+  if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+  if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+  if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+  if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
 }
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// 4. Copy Location Link
+// 4. نسخ رابط الموقع/القاعة
 function copyLocation() {
   const url = 'https://share.google/8MyrDvoZ94dbffSTs';
   navigator.clipboard.writeText(url).then(() => {
@@ -69,7 +75,7 @@ function copyLocation() {
   });
 }
 
-// 5. Google Sheets Wishes Wall Integration
+// 5. حائط التهاني المرتبط بـ Google Sheets
 function escapeHTML(str) {
   if (!str) return '';
   return String(str).replace(/[&<>"']/g, m => ({
@@ -112,6 +118,8 @@ async function addWish(e) {
   e.preventDefault();
   const nameInput = document.getElementById('guest-name');
   const msgInput = document.getElementById('guest-message');
+  if (!nameInput || !msgInput) return;
+
   const name = nameInput.value.trim();
   const message = msgInput.value.trim();
   if (!name || !message) return;
@@ -167,13 +175,14 @@ async function deleteWish(id) {
   }
 }
 
-// 6. Scroll Reveal & Hall Animation Observer
+// 6. تأثيرات ظهور الأقسام أثناء التمرير
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('is-visible');
       if (entry.target.id === 'venue') {
-        document.getElementById('hall-illustration').classList.add('hall-animated');
+        const hallIllustration = document.getElementById('hall-illustration');
+        if (hallIllustration) hallIllustration.classList.add('hall-animated');
       }
     }
   });
@@ -181,7 +190,7 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal-section').forEach(el => observer.observe(el));
 
-// Active Nav Link Highlight
+// تمييز القائمة النشطة أثناء التمرير
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-link');
 
@@ -197,7 +206,7 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// 7. Toast Helper
+// 7. مساعد التنبيهات (Toast)
 function showToast(text) {
   const toast = document.getElementById('toast');
   if (!toast) return;
@@ -208,5 +217,5 @@ function showToast(text) {
   }, 2800);
 }
 
-// Load wishes on startup
+// تحميل التهاني تلقائياً عند فتح الموقع
 renderWishes();
