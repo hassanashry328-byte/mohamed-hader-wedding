@@ -194,7 +194,7 @@ document.querySelectorAll('.reveal-section').forEach(el => observer.observe(el))
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-link');
 
-window.addEventListener('scroll', () => {
+function updateActiveNavLink() {
   let current = '';
   sections.forEach(sec => {
     if (window.scrollY >= sec.offsetTop - 180) {
@@ -204,7 +204,10 @@ window.addEventListener('scroll', () => {
   navLinks.forEach(link => {
     link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
   });
-});
+}
+
+window.addEventListener('scroll', updateActiveNavLink, { passive: true });
+updateActiveNavLink();
 
 // 7. مساعد التنبيهات (Toast)
 function showToast(text) {
