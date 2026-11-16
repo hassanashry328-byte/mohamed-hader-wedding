@@ -6,21 +6,19 @@ const bgMusic = new Audio('song.mp3');
 bgMusic.loop = true; // لتكرار الأغنية تلقائياً
 let isPlaying = false;
 
-// 1. فتح شاشة الترحيب وتشغيل الأغنية فوراً مع الضغط
+// 1. فتح شاشة الترحيب وتشغيل الأغنية فوراً كاستجابة لزر الفتح
 function openInvitation() {
   const splash = document.getElementById('splash-screen');
   if (splash) splash.classList.add('hidden-splash');
   
-  // تشغيل الأغنية فوراً كاستجابة لضغط زر فتح الدعوة
+  // التشغيل الفوري لحظة الضغط لتجاوز قيود السيرفر على الإنترنت
   bgMusic.currentTime = 0;
   bgMusic.play().then(() => {
     isPlaying = true;
     const musicIcon = document.getElementById('music-icon');
     if (musicIcon) musicIcon.textContent = '❚❚';
-    showToast('تم تشغيل أغنية الليلادي 🎵');
-  }).catch(e => {
-    console.log("Audio play blocked by browser policy", e);
-    showToast('اضغط على رمز الموسيقى بالأعلى لتشغيلها');
+  }).catch(error => {
+    console.log("Autoplay prevented by browser:", error);
   });
 }
 
