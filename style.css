@@ -1,5 +1,5 @@
 :root {
-    color-scheme: only light;
+  color-scheme: only light;
   --ivory: #FAF8F5;
   --sage: #4A5D4E;
   --sage-dark: #36463A;
@@ -444,4 +444,13 @@ footer {
     opacity: 1;
     transform: none;
   }
+
+}
+/* تنسيق قسم طلب الخدمات الإضافية */
+#freelance-promo {
+  position: relative;
+  z-index: 10;
+}
+#freelance-promo a {
+  letter-spacing: 0.5px;
 }
