@@ -11,6 +11,10 @@ body {
   overflow-x: hidden;
 }
 
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
 /* Splash Screen */
 #splash-screen {
   position: fixed;
