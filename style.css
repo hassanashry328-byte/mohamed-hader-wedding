@@ -333,6 +333,22 @@ footer {
 }
 /* تحسين المقاسات والهوامش لتناسب الشاشات الصغيرة للموبايل */
 @media (max-width: 768px) {
+  .reveal-section,
+  .reveal-section.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .slide-from-right,
+  .slide-from-left,
+  .is-visible .slide-from-right,
+  .is-visible .slide-from-left {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
   .editorial-card {
     padding: 1rem !important;
     margin: 0.5rem;
