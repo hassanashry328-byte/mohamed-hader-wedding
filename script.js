@@ -114,6 +114,41 @@ async function renderWishes() {
   }
 }
 
+function launchLoveBurst() {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const submitButton = document.querySelector('#wish-form button[type="submit"]');
+  if (!submitButton) return;
+
+  const bounds = submitButton.getBoundingClientRect();
+  const hearts = ['♥', '♡', '✦'];
+  const colors = ['#C56A83', '#D99AA9', '#C5A059', '#E3B6C2'];
+  const burst = document.createElement('div');
+  burst.className = 'love-burst';
+  burst.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(burst);
+
+  for (let i = 0; i < 18; i++) {
+    const particle = document.createElement('span');
+    const delay = Math.random() * 0.25;
+    const duration = 1.8 + Math.random() * 0.8;
+    particle.className = 'love-burst-heart';
+    particle.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    particle.style.left = `${bounds.left + bounds.width / 2 + (Math.random() - 0.5) * 90}px`;
+    particle.style.top = `${bounds.top + bounds.height / 2 + (Math.random() - 0.5) * 18}px`;
+    particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+    particle.style.fontSize = `${15 + Math.random() * 15}px`;
+    particle.style.setProperty('--heart-drift', `${(Math.random() - 0.5) * 150}px`);
+    particle.style.setProperty('--heart-rotation', `${(Math.random() - 0.5) * 70}deg`);
+    particle.style.animationDelay = `${delay}s`;
+    particle.style.animationDuration = `${duration}s`;
+    burst.appendChild(particle);
+    setTimeout(() => particle.remove(), (delay + duration) * 1000 + 100);
+  }
+
+  setTimeout(() => burst.remove(), 3200);
+}
+
 async function addWish(e) {
   e.preventDefault();
   const nameInput = document.getElementById('guest-name');
@@ -137,6 +172,7 @@ async function addWish(e) {
       })
     });
 
+    launchLoveBurst();
     nameInput.value = '';
     msgInput.value = '';
     renderWishes();
@@ -180,6 +216,7 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
       if (entry.target.id === 'venue') {
         const hallIllustration = document.getElementById('hall-illustration');
         if (hallIllustration) hallIllustration.classList.add('hall-animated');
@@ -189,6 +226,10 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 
 document.querySelectorAll('.reveal-section').forEach(el => observer.observe(el));
+document.querySelectorAll('.photo-frame').forEach(el => {
+  el.classList.add('photo-reveal');
+  observer.observe(el);
+});
 
 // تمييز القائمة النشطة أثناء التمرير
 const sections = document.querySelectorAll('section[id]');
