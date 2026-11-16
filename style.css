@@ -1,14 +1,48 @@
 :root {
   --ivory: #FAF8F5;
   --sage: #4A5D4E;
+  --sage-dark: #36463A;
   --gold: #C5A059;
+  --gold-soft: rgba(197, 160, 89, 0.18);
+  --ink: #2A332C;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background-color: var(--ivory);
-  color: #2A332C;
+  color: var(--ink);
   font-family: 'Cairo', sans-serif;
   overflow-x: hidden;
+  line-height: 1.7;
+}
+
+::selection {
+  color: var(--ivory);
+  background: var(--sage);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(197, 160, 89, 0.75);
+  outline-offset: 3px;
+}
+
+header nav {
+  border-color: rgba(197, 160, 89, 0.4) !important;
+  box-shadow: 0 12px 35px -20px rgba(42, 51, 44, 0.42) !important;
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.35rem 0.1rem;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--sage-dark);
 }
 
 section[id] {
@@ -41,15 +75,15 @@ section[id] {
   background-image: url('bg.jpeg');
   background-size: cover;
   background-position: center;
-  opacity: 3;
-  filter: blur(2px);
+  opacity: 0.78;
+  filter: blur(1px) saturate(0.9);
   transform: scale(1.03);
 }
 
 .splash-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(250, 248, 245, 0.65) 0%, rgba(250, 248, 245, 0.88) 100%);
+  background: radial-gradient(circle at center, rgba(250, 248, 245, 0.46) 0%, rgba(250, 248, 245, 0.72) 100%);
 }
 
 .splash-card {
@@ -69,7 +103,7 @@ section[id] {
 
 .couple-title-en {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(2.45rem, 6.8vw, 3.85rem);
+  font-size: clamp(2rem, 6.8vw, 3.85rem);
   line-height: 1.25;
   color: #4A5D4E;
   white-space: nowrap;
@@ -78,18 +112,23 @@ section[id] {
 
 /* Editorial Card & Smooth Section Reveal */
 .editorial-card {
-  background: rgba(255, 255, 255, 0.84);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(197, 160, 89, 0.32);
-  box-shadow: 0 18px 45px -18px rgba(74, 93, 78, 0.12);
-  border-radius: 24px;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.45s ease;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  box-shadow: 0 18px 45px -24px rgba(42, 51, 44, 0.3);
+  border-radius: 26px;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
 .editorial-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 24px 55px -15px rgba(74, 93, 78, 0.18);
-  border-color: rgba(197, 160, 89, 0.65);
+  border-color: rgba(197, 160, 89, 0.55);
+  box-shadow: 0 24px 55px -22px rgba(42, 51, 44, 0.34);
+}
+
+@media (hover: hover) {
+  .editorial-card:hover {
+    transform: translateY(-3px);
+  }
 }
 
 .reveal-section {
@@ -178,8 +217,17 @@ section[id] {
   border-radius: 22px;
   overflow: hidden;
   border: 1px solid rgba(197, 160, 89, 0.45);
-  box-shadow: 0 20px 45px -15px rgba(74, 93, 78, 0.2);
+  box-shadow: 0 24px 50px -22px rgba(42, 51, 44, 0.42);
   background: #F3EFEA;
+}
+
+.photo-frame::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 15px;
+  pointer-events: none;
 }
 
 .photo-frame img {
@@ -205,8 +253,70 @@ section[id] {
   background-image: url('bg.jpeg');
   background-size: cover;
   background-position: center;
-  opacity: 0.35; /* تحكم في درجة وضوح الصورة من 0.1 إلى 0.6 */
+  opacity: 0.58;
+  filter: saturate(0.92);
+  transform: scale(1.02);
   pointer-events: none;
+}
+
+#home {
+  isolation: isolate;
+  background: linear-gradient(180deg, #F3EFEA 0%, #FAF8F5 94%);
+}
+
+#home .grid > div {
+  border-color: rgba(197, 160, 89, 0.48);
+  box-shadow: 0 14px 32px -22px rgba(42, 51, 44, 0.42);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+@media (hover: hover) {
+  #home .grid > div:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 36px -22px rgba(42, 51, 44, 0.48);
+  }
+}
+
+#invitation .editorial-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(250, 248, 245, 0.9));
+}
+
+#invitation .editorial-card::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid var(--gold-soft);
+  border-radius: 17px;
+  pointer-events: none;
+}
+
+#countdown .editorial-card {
+  background: linear-gradient(145deg, #FFFFFF, #F8F5EF);
+}
+
+#venue .grid > div {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(248, 245, 239, 0.9));
+}
+
+#wishes form {
+  box-shadow: 0 24px 55px -30px rgba(42, 51, 44, 0.38);
+}
+
+#wishes input,
+#wishes textarea {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#wishes input:focus,
+#wishes textarea:focus {
+  border-color: var(--sage);
+  box-shadow: 0 0 0 4px rgba(74, 93, 78, 0.1);
+}
+
+footer {
+  background: linear-gradient(180deg, rgba(243, 239, 234, 0.55), rgba(243, 239, 234, 0.95));
 }
 
 .hero-overlay {
@@ -214,45 +324,123 @@ section[id] {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(250, 248, 245, 0.35) 0%,
-    rgba(250, 248, 245, 0.55) 65%,
-    rgba(250, 248, 245, 1) 100%
+    rgba(250, 248, 245, 0.2) 0%,
+    rgba(250, 248, 245, 0.38) 65%,
+    rgba(250, 248, 245, 0.92) 100%
   );
   pointer-events: none;
 }
-/* ضبط الخلفية لتكون واضحة وثابتة وملء الشاشة تماماً على الهواتف */
-body {
-  background-image: url('bg.jpeg');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
-/* طبقة تفتيح خفيفة فوق الخلفية لضمان قراءة النصوص بوضوح تام على الموبايل */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.75); /* يمكنك تقليل الرقم أو زيادته حسب تفتيح الخلفية */
-  z-index: -1;
-}
-
 /* تحسين المقاسات والهوامش لتناسب الشاشات الصغيرة للموبايل */
 @media (max-width: 768px) {
   .editorial-card {
     padding: 1rem !important;
     margin: 0.5rem;
   }
+
+  #home {
+    min-height: 88vh;
+    min-height: 88svh;
+  }
+
+  #invitation .editorial-card::before {
+    inset: 8px;
+  }
+
+  #wishes input,
+  #wishes textarea {
+    font-size: 16px;
+  }
   
   /* تصغير العناوين قليلاً لكي لا تلتف بشكل مزعج على شاشات الهواتف الضيقة */
   h1 {
     font-size: 1.75rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header nav {
+    gap: 0.4rem !important;
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  header nav > div {
+    flex: 1 1 0%;
+    min-width: 0;
+    gap: 0.65rem !important;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  header nav > div::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    font-size: 0.7rem;
+  }
+
+  #music-toggle {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  #home .grid {
+    gap: 0.5rem;
+  }
+
+  #home .grid > div {
+    padding: 0.65rem 0.25rem;
+    border-radius: 1rem;
+  }
+
+  #home .grid > div span:nth-child(2) {
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+  }
+}
+
+@media (max-width: 380px) {
+  #splash-screen {
+    padding: 0.75rem;
+  }
+
+  .splash-card {
+    padding: 2rem 1rem;
+    border-radius: 22px;
+  }
+
+  .couple-title-en {
+    font-size: 2rem;
+  }
+
+  #home .couple-title-en {
+    font-size: 2rem;
+  }
+
+  #home .grid > div span:first-child {
+    font-size: 1.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal-section,
+  .slide-from-right,
+  .slide-from-left {
+    opacity: 1;
+    transform: none;
   }
 }
