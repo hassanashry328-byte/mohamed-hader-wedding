@@ -65,6 +65,16 @@ function doPost(e) {
     return outputJson({ status: 'error', message: 'لم يتم العثور على التهنئة' });
   }
 
+  if (data.action === 'delete') {
+    const adminPassword = PropertiesService.getScriptProperties().getProperty('ADMIN_PASSWORD');
+    if (!adminPassword || String(data.password || '') !== adminPassword) {
+      return outputJson({ status: 'error', message: 'كلمة مرور المشرف غير صحيحة' });
+    }
+
+    sheet.deleteRow(rowIndex + 2);
+    return outputJson({ status: 'success' });
+  }
+
   if (data.action === 'edit') {
     const rowOwnerToken = String(values[rowIndex][ownerTokenIndex] || '');
     if (!rowOwnerToken || rowOwnerToken !== String(data.ownerToken || '')) {
