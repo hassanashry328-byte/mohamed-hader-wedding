@@ -613,7 +613,7 @@ footer {
   z-index: 10;
 }
 #freelance-promo a {
-  letter-spacing: 0;
+  letter-spacing: 0.15px;
 }
 
 #freelance-promo a:focus-visible {
