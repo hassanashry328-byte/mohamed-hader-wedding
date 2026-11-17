@@ -458,6 +458,13 @@ footer {
   .open-invitation {
     width: min(270px, calc(100vw - 3rem));
     min-width: 0;
+    padding-inline: 1.1rem;
+    gap: 0.65rem;
+  }
+
+  .open-invitation strong {
+    font-size: 0.92rem;
+    letter-spacing: 0.08em;
   }
 
   .reveal-section,
