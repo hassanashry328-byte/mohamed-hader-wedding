@@ -66,7 +66,8 @@ function doPost(e) {
   }
 
   if (data.action === 'delete') {
-    const adminPassword = PropertiesService.getScriptProperties().getProperty('ADMIN_PASSWORD');
+    // تم استبدال قراءة كلمة المرور من إعدادات السكريبت بالرقم المطلوب مباشرة
+    const adminPassword = '01551946625';
     if (!adminPassword || String(data.password || '') !== adminPassword) {
       return outputJson({ status: 'error', message: 'كلمة مرور المشرف غير صحيحة' });
     }
