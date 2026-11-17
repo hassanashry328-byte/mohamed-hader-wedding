@@ -615,3 +615,8 @@ footer {
 #freelance-promo a {
   letter-spacing: 0.5px;
 }
+
+#freelance-promo a:focus-visible {
+  outline: 3px solid rgba(197, 160, 89, 0.75);
+  outline-offset: 4px;
+}
