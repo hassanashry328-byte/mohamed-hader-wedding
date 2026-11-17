@@ -134,7 +134,7 @@ async function renderWishes() {
           <span class="font-bold text-sage text-sm sm:text-base">${escapeHTML(w.name)}</span>
           <div class="flex items-center gap-3">
             <span class="text-[11px] text-gold">${escapeHTML(String(w.time || ''))}</span>
-            ${ownedWishIds.includes(String(w.id)) ? `<button onclick="editWish('${escapeHTML(String(w.id))}')\" class="text-xs text-sage hover:text-sageDark transition" title="تعديل تهنئتك">تعديل</button>` : ''}
+            ${ownedWishIds.includes(String(w.id)) ? `<button onclick="editWish('${escapeHTML(String(w.id))}')" class="text-xs text-sage hover:text-sageDark transition" title="تعديل تهنئتك">تعديل</button>` : ''}
             <button onclick="deleteWish('${w.id}')" class="text-xs text-red-500 hover:text-red-700 transition" title="حذف التهنئة">✕</button>
           </div>
         </div>
@@ -237,6 +237,7 @@ async function editWish(id) {
   try {
     const response = await fetch(WEB_APP_URL, {
       method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         action: 'edit',
         id: id,
