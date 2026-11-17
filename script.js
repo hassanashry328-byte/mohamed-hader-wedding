@@ -85,10 +85,39 @@ function escapeHTML(str) {
   }[m]));
 }
 
+function getOwnedWishIds() {
+  try {
+    return JSON.parse(localStorage.getItem('ownedWishIds') || '[]');
+  } catch (error) {
+    return [];
+  }
+}
+
+function getOwnerToken() {
+  let token = localStorage.getItem('wishOwnerToken');
+  if (!token) {
+    token = typeof crypto !== 'undefined' && crypto.randomUUID
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random()}`;
+    localStorage.setItem('wishOwnerToken', token);
+  }
+  return token;
+}
+
+function rememberOwnedWish(id) {
+  if (!id) return;
+  const ownedWishIds = getOwnedWishIds();
+  if (!ownedWishIds.includes(String(id))) {
+    ownedWishIds.push(String(id));
+    localStorage.setItem('ownedWishIds', JSON.stringify(ownedWishIds));
+  }
+}
+
 async function renderWishes() {
   const list = document.getElementById('wishes-list');
   if (!list) return;
   list.innerHTML = `<div class="text-center text-muted py-4 text-sm">جاري تحميل التهاني...</div>`;
+  const ownedWishIds = getOwnedWishIds();
   
   try {
     const response = await fetch(WEB_APP_URL);
@@ -105,6 +134,7 @@ async function renderWishes() {
           <span class="font-bold text-sage text-sm sm:text-base">${escapeHTML(w.name)}</span>
           <div class="flex items-center gap-3">
             <span class="text-[11px] text-gold">${escapeHTML(String(w.time || ''))}</span>
+            ${ownedWishIds.includes(String(w.id)) ? `<button onclick="editWish('${escapeHTML(String(w.id))}')\" class="text-xs text-sage hover:text-sageDark transition" title="تعديل تهنئتك">تعديل</button>` : ''}
             <button onclick="deleteWish('${w.id}')" class="text-xs text-red-500 hover:text-red-700 transition" title="حذف التهنئة">✕</button>
           </div>
         </div>
@@ -164,15 +194,20 @@ async function addWish(e) {
   showToast('جاري إرسال تهنئتك...');
 
   try {
-    await fetch(WEB_APP_URL, {
+    const ownerToken = getOwnerToken();
+    const response = await fetch(WEB_APP_URL, {
       method: 'POST',
       body: JSON.stringify({
         action: 'add',
         name: name,
         message: message,
+        ownerToken: ownerToken,
         time: new Date().toLocaleDateString('ar-EG', { day: 'numeric', month: 'short' })
       })
     });
+    const result = await response.json();
+    if (result?.id) rememberOwnedWish(result.id);
+    if (result?.status === 'error') throw new Error(result.message || 'Failed to add wish');
 
     launchLoveBurst();
     nameInput.value = '';
@@ -181,6 +216,43 @@ async function addWish(e) {
     showToast('تمت إضافة تهنئتك إلى حائط الذكريات بنجاح ♡');
   } catch (error) {
     showToast('حدث خطأ أثناء الإرسال، حاول مرة أخرى');
+  }
+}
+
+async function editWish(id) {
+  const wishCard = Array.from(document.querySelectorAll('#wishes-list .editorial-card'))
+    .find(card => card.querySelector(`[onclick="editWish('${id}')"]`));
+  const messageElement = wishCard?.querySelector('p');
+  const currentMessage = messageElement?.textContent || '';
+  const newMessage = prompt('عدّل تهنئتك:', currentMessage);
+  if (newMessage === null) return;
+
+  const message = newMessage.trim();
+  if (!message) {
+    showToast('لا يمكن أن تكون التهنئة فارغة');
+    return;
+  }
+
+  showToast('جاري تعديل تهنئتك...');
+  try {
+    const response = await fetch(WEB_APP_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'edit',
+        id: id,
+        ownerToken: getOwnerToken(),
+        message: message
+      })
+    });
+    const result = await response.json();
+    if (result.status === 'success') {
+      await renderWishes();
+      showToast('تم تعديل تهنئتك بنجاح');
+    } else {
+      showToast(result.message || 'لا يمكن تعديل هذه التهنئة');
+    }
+  } catch (error) {
+    showToast('حدث خطأ أثناء تعديل التهنئة');
   }
 }
 
