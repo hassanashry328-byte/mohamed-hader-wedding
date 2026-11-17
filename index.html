@@ -32,7 +32,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="style.css?v=7bf1217" />
+  <link rel="stylesheet" href="style.css?v=invitation-clear-cta" />
 </head>
 <body class="antialiased selection:bg-sage selection:text-ivory">
 
@@ -60,9 +60,12 @@
       <p class="font-serif text-sm sm:text-base tracking-[0.2em] text-ink uppercase mb-1">Friday • 4 December 2026</p>
       <p class="text-xs text-muted mb-7">الجمعة ٤ ديسمبر ٢٠٢٦</p>
 
-      <button onclick="openInvitation()" class="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-sage hover:bg-sageDark text-ivory font-serif text-sm tracking-[0.18em] uppercase shadow-lg shadow-sage/25 transition-all duration-300 hover:scale-105 cursor-pointer">
-        <span>Open Invitation</span>
-        <span class="text-goldLight">♡</span>
+      <button type="button" onclick="openInvitation()" aria-label="افتح دعوة حفل الزفاف" class="open-invitation mx-auto flex items-center justify-center gap-3 px-9 py-4 rounded-full bg-sage hover:bg-sageDark text-ivory cursor-pointer">
+        <span class="open-invitation-icon" aria-hidden="true">♡</span>
+        <span class="flex flex-col leading-tight text-right">
+          <strong class="font-serif text-base sm:text-lg tracking-[0.14em]">OPEN INVITATION</strong>
+          <span class="mt-1 text-xs text-goldLight font-medium">اضغط لفتح الدعوة</span>
+        </span>
       </button>
     </div>
   </div>
