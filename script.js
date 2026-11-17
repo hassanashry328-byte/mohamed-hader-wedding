@@ -11,6 +11,7 @@ function openInvitation() {
   const splash = document.getElementById('splash-screen');
   if (!splash) return;
   splash.classList.add('hidden-splash');
+  window.scrollTo({ top: 0, behavior: 'auto' });
   
   // التشغيل الفوري لحظة الضغط لتجاوز قيود السيرفر على الإنترنت
   bgMusic.currentTime = 0;

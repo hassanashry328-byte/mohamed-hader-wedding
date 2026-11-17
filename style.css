@@ -446,6 +446,20 @@ footer {
 }
 /* تحسين المقاسات والهوامش لتناسب الشاشات الصغيرة للموبايل */
 @media (max-width: 768px) {
+  #splash-screen {
+    align-items: center;
+  }
+
+  .splash-card {
+    max-height: calc(100svh - 1.5rem);
+    overflow-y: auto;
+  }
+
+  .open-invitation {
+    width: min(270px, calc(100vw - 3rem));
+    min-width: 0;
+  }
+
   .reveal-section,
   .reveal-section.is-visible {
     opacity: 1;
